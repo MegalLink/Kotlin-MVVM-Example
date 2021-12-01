@@ -2,10 +2,12 @@ package com.example.examplemvvm.domain
 
 import com.example.examplemvvm.data.QuoteRepository
 import com.example.examplemvvm.data.model.QuoteModel
+import javax.inject.Inject
 
-//logica del negocio, casos de uso
-class GetQuote {
-    private val repository =QuoteRepository()
+//logica del negocio, casos de uso Injectable
+class GetQuote @Inject constructor(
+    private val repository: QuoteRepository
+){
     suspend operator fun invoke ():QuoteModel?{
         return repository.getQuote()
     }

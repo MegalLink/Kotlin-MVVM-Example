@@ -5,13 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.examplemvvm.data.model.QuoteModel
 import com.example.examplemvvm.domain.GetQuote
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
-class QuoteViewModel :ViewModel(){
+import javax.inject.Inject
+//View Model al cual podemos injectar dependencias en el constructor
+@HiltViewModel
+class QuoteViewModel @Inject constructor(
+    private val getQuote: GetQuote
+) :ViewModel(){
     //creamos una variable que va a ser observada
     val quoteModel= MutableLiveData<QuoteModel>()
     val isLoading=MutableLiveData<Boolean>()
-    var getQuote=GetQuote()
     fun onCreate(){
         refreshQuote()
     }
